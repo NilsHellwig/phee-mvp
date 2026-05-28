@@ -12,8 +12,19 @@ TREATMENT_FIELDS = [
 ORDER_MAIN = ["event_type", "subject", "treatment", "effect"]
 EVENT_TYPES = ["Adverse_event", "Potential_therapeutic_event"]
 
-GOLD_PATH_TEMPLATE = "/home/hellwig/medical/phee-with-chatgpt/data/converted_data/text2spotasoc/event/phee2_cross{split}/test.json"
-PHEE_METRIC_DIR = "/home/hellwig/medical/phee-with-chatgpt"
+LLM_DICT = {
+    "google/gemma-4-31B": {
+        "vllm": "google/gemma-4-31B",
+        "file_path": "google_gemma-4-31B",
+        "nice_print": "Gemma 4 (31B)",
+    }
+}
+
+# Base directory for relative paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+GOLD_PATH_TEMPLATE = os.path.join(BASE_DIR, "../phee-with-chatgpt/data/converted_data/text2spotasoc/event/phee2_cross{split}/test.json")
+PHEE_METRIC_DIR = os.path.join(BASE_DIR, "../phee-with-chatgpt")
 
 EVENT_TYPE_MAP = {
     "adverse event": "Adverse_event",
@@ -103,7 +114,7 @@ def get_prompt(format_type, few_shot_examples, sentence,
                order_subject=SUBJECT_FIELDS,
                order_treatment=TREATMENT_FIELDS):
     """Generates a prompt by populating a template with descriptions and few-shot examples."""
-    template_path = f"/home/hellwig/medical/phee-mvp/prompts/{format_type}.md"
+    template_path = os.path.join(BASE_DIR, f"prompts/{format_type}.md")
     with open(template_path, 'r', encoding='utf-8') as f:
         prompt = f.read()
 
@@ -146,7 +157,10 @@ def get_prompt(format_type, few_shot_examples, sentence,
         replacements["{{sub_format_example}}"] = main_fmt
     for key, val in replacements.items():
         prompt = prompt.replace(key, val)
-    return prompt
+    
+    # Ensure the prompt ends exactly with ": [" to guide the model into list format
+    # This prevents the model from generating whitespace or the bracket itself
+    return prompt.strip().rstrip(":") + ": ["
 
 
 def load_data(path):
@@ -159,7 +173,7 @@ def load_data(path):
 
 def load_shots(n_shot, cross_split, seed=42, format="raw"):
     """Loads n_shot random examples from the train.json of the specified cross_split."""
-    path = f"/home/hellwig/medical/phee-with-chatgpt/data/converted_data/text2spotasoc/event/phee2_cross{cross_split}/train.json"
+    path = os.path.join(BASE_DIR, f"../phee-with-chatgpt/data/converted_data/text2spotasoc/event/phee2_cross{cross_split}/train.json")
     if not os.path.exists(path):
         raise FileNotFoundError(f"File {path} not found.")
     with open(path, 'r', encoding='utf-8') as f:
@@ -205,13 +219,22 @@ def save_llm_results(predictions, results, gpu_stats, filename, task_type, outpu
         "results": []
     }
 
-    for res in results:
-        prediction_text = res.outputs[0].text
-        # Add the closing characters that were truncated by the stop sequence
-        if task_type == "main" and not prediction_text.endswith(")]"):
-            prediction_text += ")]"
-        elif task_type == "sub" and not prediction_text.endswith("}]"):
-            prediction_text += "}]"
+    for i, res in enumerate(results):
+        # Use existing prediction if available, otherwise build from raw output
+        if i < len(predictions):
+            prediction_text = predictions[i].strip()
+        else:
+            prediction_text = res.outputs[0].text.strip()
+        
+        # Ensure correct list format for 'main' and 'sub' tasks
+        if task_type in ["main", "sub"] and prediction_text:
+            if not prediction_text.startswith("["):
+                prediction_text = "[" + prediction_text
+            
+            if task_type == "main" and not prediction_text.endswith("]") and not prediction_text.endswith(")]"):
+                prediction_text += ")]"
+            elif task_type == "sub" and not prediction_text.endswith("]") and not prediction_text.endswith("}]"):
+                prediction_text += "}]"
 
         logprobs = res.outputs[0].logprobs # List of dicts per token
         
@@ -252,10 +275,15 @@ import ast
 
 def parse_llm_output(text):
     """Parses LLM output string as a Python literal (list of tuples or dicts)."""
+    text = text.strip()
+    # Add leading bracket if missing (vLLM output starts after the prompt's "[")
+    if text and not text.startswith("["):
+        text = "[" + text
+        
     try:
         # vLLM output might contain trailing noise if not perfectly stopped, though we handle it
         # ast.literal_eval is safer than eval()
-        parsed = ast.literal_eval(text.strip())
+        parsed = ast.literal_eval(text)
         if isinstance(parsed, (list, tuple)):
             return parsed
         return []

@@ -1,0 +1,210 @@
+For each event, extract the following elements:
+- 'effect': The word or phrase describing the medical result or outcome observed.
+- 'treatment': The word or phrase describing the medical treatment or medication given to the subject.
+- 'subject': The word or phrase identifying the patient(s) involved in the event.
+- 'event_type': The type of medical event (Adverse_event or Potential_therapeutic_event).
+
+Recognize all events in the following clinical text and format the output as a list of tuples: [('effect', 'treatment', 'subject', 'event_type'), ...]. If an element is not present, use 'null'.
+
+Text: Azathioprine can cause severe myelosuppression .
+Events: [('severe myelosuppression', 'Azathioprine', 'null', 'Adverse_event')]
+Text: Three of these patients had convulsions attributed to imipenem / cilastatin ; 3.6 % of the patients had seizure , or 2 % of imipenem / cilastatin administrations was followed by a seizure attack .
+Events: [('convulsions', 'imipenem / cilastatin', 'Three of these patients', 'Adverse_event'), ('seizure', 'imipenem / cilastatin', '2 %', 'Adverse_event')]
+Text: High - dose phosphate treatment leads to hypokalemia in hypophosphatemic osteomalacia .
+Events: [('hypokalemia', 'High - dose phosphate', 'null', 'Adverse_event')]
+Text: We report the case of a woman who developed photo - onycholysis on multiple nails after uptake of olanzapine .
+Events: [('photo - onycholysis on multiple nails', 'uptake of olanzapine', 'a woman', 'Adverse_event')]
+Text: We report a rare case of recurrent ( stuttering ) priapism in a patient with protein C deficiency while maintained on Warfarin therapy .
+Events: [('recurrent ( stuttering ) priapism', 'maintained on Warfarin therapy', 'a patient with protein C deficiency', 'Adverse_event')]
+Text: We report a patient with recurrent , increasingly severe episodes of PPE , ultimately complicated by a severe bullous eruption , following successive cycles of high - dose cytarabine for the treatment of acute lymphoblastic leukaemia .
+Events: [('recurrent , increasingly severe episodes of PPE , ultimately complicated by a severe bullous eruption', 'cycles of high - dose cytarabine for the treatment of acute lymphoblastic leukaemia', 'a patient', 'Adverse_event')]
+Text: We describe two patients with aspergillus arthritis of the knee joint following fludarabine - based non - myeloablative stem cell transplantation .
+Events: [('aspergillus arthritis of the knee joint', 'fludarabine - based non - myeloablative stem cell transplantation', 'two patients', 'Adverse_event')]
+Text: FINDINGS : Six children with growth retardation noted after treatment with high - dose fluticasone propionate were found to have adrenal suppression .
+Events: [('adrenal suppression', 'high - dose fluticasone propionate', 'Six children with growth retardation', 'Adverse_event')]
+Text: Propylthiouracil - induced sensorineural hearing loss associated with antineutrophil cytoplasmic antibodies .
+Events: [('sensorineural hearing loss associated with antineutrophil cytoplasmic antibodies', 'Propylthiouracil', 'null', 'Adverse_event')]
+Text: The patient 's other comorbidities and medications have not been suggested as possible interactions with sertraline that can cause rhabdomyolysis .
+Events: [('rhabdomyolysis', 'sertraline', 'null', 'Adverse_event')]
+Text: This case demonstrates that there is no cross reactivity between glyburide and chlorpropamide in producing hemolytic anemia .
+Events: [('hemolytic anemia', 'glyburide and chlorpropamide', 'null', 'Adverse_event')]
+Text: The possibility can be raised that M - CSF accelerated the underlying renal disease in this case through enhancing macrophage accumulation into the glomerulus , leading to the development of nephrotic syndrome .
+Events: [('underlying renal disease in this case through enhancing macrophage accumulation into the glomerulus , leading to the development of nephrotic syndrome', 'M - CSF', 'null', 'Adverse_event')]
+Text: The exacerbation of psoriasis was accompanied by a massive induction of lesional type I interferon activity , detected by MxA expression after imiquimod therapy .
+Events: [('exacerbation of psoriasis , a massive induction of lesional type I interferon activity', 'imiquimod', 'null', 'Adverse_event')]
+Text: Ticlopidine - induced marrow aplasia treated with cyclosporine .
+Events: [('marrow aplasia', 'Ticlopidine', 'null', 'Adverse_event')]
+Text: RESULTS : Both patients experienced a previously unreported side effect -- falling backward -- associated with bupropion use .
+Events: [('falling backward', 'bupropion', 'Both patients', 'Adverse_event')]
+Text: Refractory hypoglycemia from ciprofloxacin and glyburide interaction .
+Events: [('Refractory hypoglycemia', 'ciprofloxacin and glyburide interaction', 'null', 'Adverse_event')]
+Text: Administration of pyridoxine to an infant after a long period of convulsions was followed by acute hypotonia .
+Events: [('acute hypotonia', 'pyridoxine', 'an infant', 'Adverse_event')]
+Text: Erosion of psoriatic plaques after chronic methotrexate administration .
+Events: [('Erosion of psoriatic plaques', 'methotrexate', 'null', 'Adverse_event')]
+Text: Current immunosuppressive therapies are effective but can be associated with significant adverse reactions .
+Events: [('significant adverse reactions .', 'Current immunosuppressive therapies', 'null', 'Adverse_event')]
+Text: Leishmania infantum leishmaniasis in corticosteroid -- treated patients .
+Events: [('Leishmania infantum leishmaniasis', 'corticosteroid', 'null', 'Adverse_event')]
+Text: To report a probable case of ticlopidine - induced phenytoin toxicity .
+Events: [('phenytoin toxicity', 'phenytoin , ticlopidine', 'a probable case', 'Adverse_event')]
+Text: Quinine is universally used for the very common symptom of night leg cramps .
+Events: [('null', 'Quinine', 'null', 'Potential_therapeutic_event')]
+Text: Skin necrosis secondary to low - molecular weight heparin in a patient with antiphospholipid antibody syndrome .
+Events: [('Skin necrosis', 'low - molecular weight heparin', 'a patient with antiphospholipid antibody syndrome', 'Adverse_event')]
+Text: Although praziquantel administration may have been effective in killing the parasite in both patients , we are concerned about the production of marked inflammation as a result of treatment .
+Events: [('marked inflammation', 'praziquantel', 'parasite in both patients', 'Adverse_event')]
+Text: Drug - induced psychosis resulted from the administration of quinacrine hydrochloride at a dosage of 100 mg twice daily for the treatment of discoid lupus .
+Events: [('psychosis resulted', 'administration of quinacrine hydrochloride at a dosage of 100 mg twice daily', 'null', 'Adverse_event')]
+Text: We report two new cases of sarcoidosis in two patients with hepatitis C virus infection treated with interferon alfa and ribavirin .
+Events: [('sarcoidosis', 'interferon alfa and ribavirin', 'two patients with hepatitis C virus infection', 'Adverse_event')]
+Text: These findings are consistent with an immune - complex form of glomerulopathy in which gold is neither the antigen nor a hapten in the glomerular deposits , and they suggest the hypothesis that antibodies to tubular epithelial antigens induced by gold therapy may be a causative factor in the renal disease associated with gold therapy in rheumatoid arthritis .
+Events: [('renal disease', 'gold therapy in rheumatoid arthritis', 'null', 'Adverse_event')]
+Text: Initial treatment with heparin was substituted with thrombolysis , which resulted in clinical improvement and dissolution of right heart thrombus but was followed by fatal intracerebral haemorrhage .
+Events: [('fatal intracerebral haemorrhage', 'thrombolysis', 'null', 'Adverse_event')]
+Text: Subtherapeutic warfarin is not associated with increased hemorrhage rates in ischemic strokes treated with tissue plasminogen activator .
+Events: [('increased hemorrhage rates', 'Subtherapeutic warfarin , treated with tissue plasminogen activator', 'null', 'Adverse_event')]
+Text: OBJECTIVE : To document a case of serotonin syndrome ( SS ) associated with mirtazapine monotherapy , review the previously reported cases of SS associated with this tetracyclic antidepressant , and discuss the possible pathogenic mechanisms leading to this serious adverse drug reaction .
+Events: [('serotonin syndrome ( SS )', 'mirtazapine monotherapy', 'a case', 'Adverse_event')]
+Text: Drug induced polymyositis secondary to leuprolide acetate ( Lupron ) therapy for prostate carcinoma .
+Events: [('Drug induced polymyositis', 'leuprolide acetate ( Lupron ) therapy', 'null', 'Adverse_event')]
+Text: The occurrence of acute hepatitis is best known for ketoconazole .
+Events: [('acute hepatitis', 'ketoconazole', 'null', 'Adverse_event')]
+Text: BACKGROUND : Hypersensitivity reactions to cyclosporine are rare .
+Events: [('Hypersensitivity reactions', 'cyclosporine', 'null', 'Adverse_event')]
+Text: We describe 3 elderly patients with moderate to severe ataxia that occurred while they were taking propafenone .
+Events: [('moderate to severe ataxia', 'taking propafenone', '3 elderly patients', 'Adverse_event')]
+Text: Placebo - controlled clinical trials of recombinant human interleukin - 11 ( rhIL - 11 , also known as oprelvekin [ Neumega ] ) in patients with nonmyeloid malignancies have demonstrated significant efficacy in preventing postchemotherapy platelet nadirs of < or = 20,000 / microL , and reducing the need for platelet transfusions while continuing chemotherapy without dose reductions .
+Events: [('null', 'recombinant human interleukin - 11 ( rhIL - 11 , also known as oprelvekin [ Neumega ] )', 'patients with nonmyeloid malignancies', 'Potential_therapeutic_event')]
+Text: Phenytoin - induced hypersensitivity reactions .
+Events: [('hypersensitivity reactions .', 'Phenytoin', 'null', 'Adverse_event')]
+Text: Alone or in combination with corticosteroids , cyclosporine is an effective drug of choice for the resistant patients .
+Events: [('null', 'Alone or in combination with corticosteroids , cyclosporine', 'resistant patients', 'Potential_therapeutic_event')]
+Text: Evidence is shown in this report that adenosine was associated with dangerous worsening of arrhythmia in patients with atrial flutter .
+Events: [('dangerous worsening of arrhythmia', 'adenosine', 'patients with atrial flutter', 'Adverse_event')]
+Text: Spontaneous splenic infarction associated with sumatriptan use .
+Events: [('Spontaneous splenic infarction', 'sumatriptan', 'null', 'Adverse_event')]
+Text: METHODS / RESULTS : This paper presents a new case of rifabutin uveitis and a review of the various published reports to date .
+Events: [('uveitis', 'rifabutin', 'new case', 'Adverse_event')]
+Text: The authors describe three families in whom the occurrence of FVS in all the siblings strongly suggests hereditary susceptibility to valproic acid - induced adverse outcome .
+Events: [('FVS', 'valproic acid - induced', 'three families , all the siblings', 'Adverse_event')]
+Text: We discuss a case with significant progressive peripheral neurological deterioration following administration of both fludarabine and cytarabine as part of the FLA ( fludarabine and cytarabine ) regime .
+Events: [('significant progressive peripheral neurological deterioration', 'fludarabine and cytarabine , FLA ( fludarabine and cytarabine ) regime', 'a case', 'Adverse_event')]
+Text: We describe a patient with a liver abscess due to Entamoeba histolytica , in whom metronidazole therapy ( total dose , 21 g over 14 days ) was complicated by reversible deafness , tinnitus , and ataxia and who relapsed 5 months later with a splenic abscess .
+Events: [('reversible deafness , tinnitus , and ataxia and who relapsed 5 months later with a splenic abscess', 'metronidazole therapy ( total dose , 21 g over 14 days )', 'a patient with a liver abscess due to Entamoeba histolytica', 'Adverse_event')]
+Text: Consolidation therapy with bortezomib / lenalidomide/ dexamethasone versus bortezomib / dexamethasone after a dexamethasone - based induction regimen in patients with multiple myeloma : a randomized phase III trial .
+Events: [('null', 'Consolidation therapy with bortezomib / lenalidomide/ dexamethasone versus bortezomib / dexamethasone after a dexamethasone - based induction regimen', 'patients with multiple myeloma', 'Potential_therapeutic_event')]
+Text: We review the literature on previously reported cases of cutaneous necrosis after injection of standard interferon alfa or pegylated interferon alfa - 2b and discuss the different pathophysiologic mechanisms that might be involved .
+Events: [('cutaneous necrosis', 'standard interferon alfa , pegylated interferon alfa - 2b', 'null', 'Adverse_event')]
+Text: A case of toxic hepatitis caused by combination therapy with methotrexate and etretinate in the treatment of severe psoriasis is presented in a 47 - year - old woman .
+Events: [('toxic hepatitis', 'combination therapy with methotrexate and etretinate', 'psoriasis , a 47 - year - old woman', 'Adverse_event')]
+Text: Although HAART is very important in the treatment of HIV , its side effects are responsible for patients ' non - adherence to medications .
+Events: [('non - adherence to medications', 'HAART', 'patients', 'Adverse_event')]
+Text: Two children with rheumatic fever developed anicteric hepatitis while on high - dose aspirin therapy .
+Events: [('anicteric hepatitis', 'high - dose aspirin', 'Two children with rheumatic fever', 'Adverse_event')]
+Text: A new type of minocycline - induced cutaneous hyperpigmentation .
+Events: [('cutaneous hyperpigmentation', 'minocycline', 'null', 'Adverse_event')]
+Text: We report the case of a 27 - year - old Indian woman who developed maculopapular rash and angioedema secondary to carbamazepine administration .
+Events: [('maculopapular rash and angioedema', 'carbamazepine administration', 'a 27 - year - old Indian woman', 'Adverse_event')]
+Text: This complex pattern of nail and skin changes is accounted by synergy or an additive effect of chemotherapy agents on cellular proliferation of nail compartments .
+Events: [('complex pattern of nail and skin changes', 'chemotherapy agents', 'null', 'Adverse_event')]
+Text: We describe the first case of disseminated salmonellosis in a patient treated with temozolomide .
+Events: [('disseminated salmonellosis', 'temozolomide', 'a patient', 'Adverse_event')]
+Text: Acyclovir neurotoxicity : clinical experience and review of the literature .
+Events: [('neurotoxicity', 'Acyclovir', 'null', 'Adverse_event')]
+Text: Prevention of infection by immunization , together with early recognition and prompt antiviral treatment are critical .
+Events: [('null', 'immunization , together with early recognition and prompt antiviral treatment', 'null', 'Potential_therapeutic_event')]
+Text: To report a young man on phenytoin who developed acute neurologic symptoms after isradipine was introduced to his treatment regimen and discuss the possible causes of this drug interaction .
+Events: [('acute neurologic symptoms', 'phenytoin , isradipine', 'a young man', 'Adverse_event')]
+Text: We report three cases of severe hypocalcaemia associated with i.v . bisphosphonate treatment in patients with multiple myeloma .
+Events: [('severe hypocalcaemia', 'i.v . bisphosphonate treatment', 'patients with multiple myeloma', 'Adverse_event')]
+Text: OBJECTIVE : To report the case of a young woman with Graves ' disease in whom ototoxicity developed because of propylthiouracil ( PTU) - induced antineutrophil cytoplasmic antibody ( ANCA) - associated vasculitis .
+Events: [('ototoxicity developed', 'propylthiouracil ( PTU)', "young woman with Graves ' disease", 'Adverse_event')]
+Text: Although adverse reactions to protamine are reported infrequently and are usually mild , we recently observed the first fatal case of type I anaphylaxis resulting from protamine .
+Events: [('fatal case of type I anaphylaxis', 'protamine', 'null', 'Adverse_event')]
+Text: Taxane - induced glaucoma .
+Events: [('glaucoma', 'Taxane', 'null', 'Adverse_event')]
+Text: RESULTS : One case of recurrent primary peritoneal carcinoma previously treated with a carboplatin - based regimen , developed a platinum hypersensitivity .
+Events: [('a platinum hypersensitivity', 'a carboplatin - based regimen', 'null', 'Adverse_event')]
+Text: Pregabalin was added to clozapine in 2 patients with schizophrenia , who both suffered from severe anxiety symptoms .
+Events: [('null', 'Pregabalin was added to clozapine', '2 patients with schizophrenia , who both suffered from severe anxiety symptoms', 'Potential_therapeutic_event')]
+Text: After ruling out a hydrotelluric source of fluorine , the patient 's fluorosis was linked to chronic use of niflumic acid , following the publication in 1978 of the 2 previously reported cases affected by this drug .
+Events: [('fluorosis', 'chronic use of niflumic acid', "the patient 's", 'Adverse_event')]
+Text: Ballistic movements due to ischemic infarcts after intravenous heroin overdose : report of two cases .
+Events: [('Ballistic movements due to ischemic infarcts', 'intravenous heroin overdose', 'two cases', 'Adverse_event')]
+Text: Pericardial hemorrhage due to acetylsalicylic acid in a patient with essential thrombocythemia .
+Events: [('Pericardial hemorrhage', 'acetylsalicylic acid', 'null', 'Adverse_event')]
+Text: Verapamil is widely used for the termination of paroxysmal supraventricular tachycardia ( PSVT ) with little proarrhythmic effect .
+Events: [('proarrhythmic effect', 'Verapamil', 'null', 'Adverse_event')]
+Text: ARDS has been associated with the administration of other monoclonal antibodies , such as infliximab , gemtuzumab ozogamicin , and OKT3 and is believed to be directly mediated by release of proinflammatory cytokines .
+Events: [('ARDS', 'the administration of other monoclonal antibodies , such as infliximab , gemtuzumab ozogamicin , and OKT3', 'null', 'Adverse_event')]
+Text: A 15 - year follow - up of phenytoin - induced unilateral gingival hyperplasia : a case report .
+Events: [('unilateral gingival hyperplasia', 'phenytoin', 'null', 'Adverse_event')]
+Text: CONCLUSION : There are only a few confirmed cases of gemcitabine - associated HUS despite the widespread use of the drug .
+Events: [('HUS', 'gemcitabine', 'null', 'Adverse_event')]
+Text: Phantom limb pain as a manifestation of paclitaxel neurotoxicity .
+Events: [('Phantom limb pain', 'paclitaxel', 'null', 'Adverse_event')]
+Text: Case 1 presented after 25 months of myelosuppressive therapy a deletion of chromosome no . 12 , del ( 12 ) ( p11 ) , in 60 % of the diploid cells .
+Events: [('a deletion of chromosome no . 12 , del ( 12 ) ( p11 ) , in 60 % of the diploid cells', '25 months of myelosuppressive therapy', 'Case 1', 'Adverse_event')]
+Text: In both patients the rippling phenomena worsened with pyridostigmine treatment but markedly improved after immunosuppression with azathioprine .
+Events: [('rippling phenomena', 'pyridostigmine', 'both patients', 'Adverse_event')]
+Text: Two of these patients , who also received the anti - emetic prochlorperazine , lost consciousness for 48 - 72 h and then fully recovered .
+Events: [('lost consciousness for 48 - 72 h and then fully recovered', 'anti - emetic prochlorperazine', 'Two of these patients', 'Adverse_event')]
+Text: A 57 - year - old man developed chronic , watery diarrhea four weeks after Helicobacter pylori eradication therapy including lansoprazole followed by lansoprazole monotherapy for gastroesophageal reflux disease .
+Events: [('chronic , watery diarrhea', 'four weeks after Helicobacter pylori eradication therapy including lansoprazole followed by lansoprazole monotherapy for gastroesophageal reflux disease', '57 - year - old man', 'Adverse_event')]
+Text: Intrathecal methotrexate - induced acute cerebellar syndrome .
+Events: [('acute cerebellar syndrome', 'methotrexate', 'null', 'Adverse_event')]
+Text: A 38 - year - old white female with cystic fibrosis treated with venlafaxine 300 mg / day for one year was prescribed linezolid 600 mg intravenously every 12 hours for treatment of methicillin - resistant Staphylococcus aureus ( MRSA ) pulmonary infection .
+Events: [('null', 'venlafaxine 300 mg / day for one year', 'A 38 - year - old white female', 'Potential_therapeutic_event'), ('null', 'linezolid 600 mg intravenously every 12 hours', 'A 38 - year - old white female', 'Potential_therapeutic_event')]
+Text: A 10 - year - old girl with Lennox - Gastaut syndrome who received intravenous lorazepam for atypical absence status seizures is reported .
+Events: [('null', 'intravenous lorazepam', 'A 10 - year - old girl with Lennox - Gastaut syndrome', 'Potential_therapeutic_event')]
+Text: He began taking propafenone only 6 days prior to admission because of uncontrolled atrial fibrillation and symptoms of fatigue .
+Events: [('null', 'propafenone', 'null', 'Potential_therapeutic_event')]
+Text: We describe serotonin syndrome after concomitant use of linezolid and meperidine in a 27 - year - old man with acute leukemia .
+Events: [('serotonin syndrome', 'concomitant use of linezolid and meperidine', 'a 27 - year - old man with acute leukemia', 'Adverse_event')]
+Text: Teicoplanin - induced agranulocytosis that followed vancomycin - induced agranulocytosis suggests a possible cross - reactivity between the 2 drugs .
+Events: [('agranulocytosis', 'Teicoplanin , followed vancomycin', 'null', 'Adverse_event')]
+Text: Thus , the possible in vivo effects of insulin on adipocytes were clearly observed in this case of insulin - induced lipohypertrophy .
+Events: [('lipohypertrophy', 'insulin', 'null', 'Adverse_event')]
+Text: A 65 - year - old woman with angina pectoris presented with syncope after sublingual ingestion of isosorbide dinitrate ( 5 mg ) .
+Events: [('syncope', 'sublingual ingestion of isosorbide dinitrate ( 5 mg )', 'A 65 - year - old woman with angina pectoris', 'Adverse_event')]
+Text: This is the first report of an adverse effect of fetal renal circulation by maternal ingestion of nimesulide .
+Events: [('fetal renal circulation', 'maternal ingestion of nimesulide , nimesulide', 'first report of an adverse effect of fetal renal circulation', 'Adverse_event')]
+Text: After taking cholestyramine II sachets twice daily for two months she presented with lethargy , confusion and drowsiness .
+Events: [('lethargy , confusion and drowsiness', 'cholestyramine II sachets twice daily for two months', 'she', 'Adverse_event')]
+Text: We offered several tentative explanations for this event , including an adverse interaction between paroxetine and other agent(s ) used in the course of the anaesthesia .
+Events: [('adverse interaction', 'paroxetine and other agent(s )', 'null', 'Adverse_event')]
+Text: CONCLUSION : A 37 - year - old African - American man with G6PD deficiency developed hemolytic anemia , hepatitis , orthostatic hypotension , and aseptic meningitis simultaneously after using trimethoprim - sulfamethoxazole .
+Events: [('hemolytic anemia , hepatitis , orthostatic hypotension , and aseptic meningitis', 'trimethoprim - sulfamethoxazole', 'A 37 - year - old African - American man with G6PD deficiency', 'Adverse_event')]
+Text: A dapsone hypersensitivity syndrome , consisting of fever , headache , nausea , vomiting , lymphadenopathy , hepatitis , hemolysis , leukopenia , and mononucleosis , has been described in patients treated with the drug for leprosy .
+Events: [('hypersensitivity syndrome , consisting of fever , headache , nausea , vomiting , lymphadenopathy , hepatitis , hemolysis , leukopenia , and mononucleosis', 'dapsone', 'patients', 'Adverse_event')]
+Text: Distinct patterns of chromonychia , Beau 's lines , and melanoderma seen with vincristine , adriamycin , dexamethasone therapy for multiple myeloma .
+Events: [("Distinct patterns of chromonychia , Beau 's lines , and melanoderma", 'vincristine , adriamycin , dexamethasone', 'null', 'Adverse_event')]
+Text: In this report , we present a case of hypoglycaemic coma associated with SP , an adverse reaction that is likely to be underreported and expected to occur with greater frequency as the use of SP increases .
+Events: [('hypoglycaemic coma , an adverse reaction that is likely to be underreported and expected to occur with greater frequency as the use of SP increases', 'SP', 'null', 'Adverse_event')]
+Text: EEG abnormalities were observed in two of the nine children during chlorambucil therapy .
+Events: [('EEG abnormalities', 'chlorambucil', 'two of the nine children', 'Adverse_event')]
+Text: Two patients are described who developed testicular swelling and pain during treatment with desipramine .
+Events: [('testicular swelling and pain', 'desipramine', 'Two patients', 'Adverse_event')]
+Text: We report a case of a 60 - year - old woman affected by squamous lung carcinoma , who developed paroxysmal supraventricular tachycardia during cisplatin and etoposide combination chemotherapy .
+Events: [('paroxysmal supraventricular tachycardia', 'cisplatin and etoposide combination', '60 - year - old woman affected by squamous lung carcinoma', 'Adverse_event')]
+Text: In this case , the increase in the INR value with associated bruising after the addition of amoxycillin suggests a drug interaction between acenocoumarol and amoxycillin , other possible causes having been eliminated .
+Events: [('the increase in the INR value with associated bruising', 'amoxycillin', 'null', 'Adverse_event')]
+Text: Visceral herpesvirus infections in leukemic patients receiving cytarabine .
+Events: [('Visceral herpesvirus infections', 'cytarabine', 'leukemic patients', 'Adverse_event')]
+Text: According to the literature , chlorambucil central nervous toxicity is found almost exclusively in childhood nephrotic syndrome .
+Events: [('central nervous toxicity', 'chlorambucil', 'childhood nephrotic syndrome', 'Adverse_event')]
+Text: Early peritoneal dialysis has not previously been reported for lisinopril induced multiorgan failure .
+Events: [('multiorgan failure', 'lisinopril', 'null', 'Adverse_event')]
+Text: During and after IFN therapy we should consider the possibility of occurrence of IDDM as well as other autoimmune diseases and observe the clinical course carefully .
+Events: [('IDDM as well as other autoimmune diseases', 'IFN therapy', 'null', 'Adverse_event')]
+Text: Ethambutol is an antimicrobial agent used frequently to treat tuberculosis .
+Events: [('null', 'Ethambutol', 'null', 'Potential_therapeutic_event')]
+Text: We report three cases of severe hepatotoxicity related to benzarone , a benzofuran derivative .
+Events: [('severe hepatotoxicity', 'benzarone', 'three cases', 'Adverse_event')]
+Text: The hypercalcemia responded to discontinuation of rhGH and a single dose of intravenous pamidronate disodium and has not recurred in 8 months of follow - up .
+Events: [('has not recurred in 8 months of follow - up', 'discontinuation of rhGH and a single dose of intravenous pamidronate disodium', 'null', 'Potential_therapeutic_event')]
+Text: Some patients develop hypersensitivity rash in response to HCQ .
+Events: [('hypersensitivity rash', 'HCQ', 'Some patients', 'Adverse_event')]
+Text: CONCLUSION : Oral mucositis is a frequent and potentially severe complication of cancer chemotherapy .
+Events: [

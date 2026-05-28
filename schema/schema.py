@@ -52,11 +52,12 @@ def get_schema_main(valid_phrases, order=ORDER_MAIN, allow_empty=True):
 
     tuple_pattern = rf"\(" + ", ".join(parts) + rf"\)"
 
-    # list of tuples: [(...), (...)]
+    # list of tuples: (tuple1), (tuple2)] or ]
+    # The leading "[" is now part of the prompt
     if allow_empty:
-        pattern = rf"\[({tuple_pattern}(, {tuple_pattern})*)?\]"
+        pattern = rf"({tuple_pattern}(, {tuple_pattern})*)?\]"
     else:
-        pattern = rf"\[{tuple_pattern}(, {tuple_pattern})*\]"
+        pattern = rf"{tuple_pattern}(, {tuple_pattern})*\]"
 
     # Return pattern with optional newline at the end
     return pattern + r"\n?"
@@ -108,10 +109,11 @@ def get_schema_sub(valid_phrases, order_main=ORDER_MAIN,
 
     dict_pattern = rf"\{{" + ", ".join(dict_parts) + rf"\}}"
 
-    # list of dictionaries: [{}, {}]
+    # list of dictionaries: {}, {}] or ]
+    # The leading "[" is expected to be in the prompt.
     if allow_empty:
-        pattern = rf"\[({dict_pattern}(, {dict_pattern})*)?\]"
+        pattern = rf"({dict_pattern}(, {dict_pattern})*)?\]"
     else:
-        pattern = rf"\[{dict_pattern}(, {dict_pattern})*\]"
+        pattern = rf"{dict_pattern}(, {dict_pattern})*\]"
 
     return pattern + r"\n?"
